@@ -24,7 +24,11 @@ build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+node_modules/*
+!node_modules/angular
+!node_modules/angular-local-storage
+!node_modules/angular-route
+!node_modules/bootstrap
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 *.iml
