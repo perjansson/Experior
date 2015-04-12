@@ -1,0 +1,63 @@
+<div class="boxContainer one" ng-class="{'hover' : isHoveringBox}">
+    <div class="boxContainer two" ng-class="{'hover' : isHoveringBox}" pj-background changevalue="boxes">
+        <div class="row" id="boxes">
+            <!-- Could consider having this logic and/or template in a directive (pj-box-size) -->
+            <div ng-class="{'col-xs-4' : (($index + 1) % 6 == 1) || (($index + 1) % 6 == 2) || (($index + 1) % 6 == 3), 'col-xs-6' : (($index + 1) % 6 == 4) || (($index + 1) % 6 == 5), 'col-xs-12' : ($index + 1) % 6 == 0}"
+                 ng-repeat="box in boxes" class="box-wrapper">
+                <div class="panel box text-center"
+                     ng-class="{'panel-default' : (($index + 1) % 4 == 1), 'panel-danger' : (($index + 1) % 4 == 2), 'panel-success' : (($index + 1) % 4 == 3), 'panel-info' : ($index + 1) % 4 == 0}"
+                     ng-click="addBoxAtIndex($index+1)" ng-mouseenter="$parent.isHoveringBox=true" ng-mouseleave="$parent.isHoveringBox=false"
+                     ng-attr-id="{{ 'box-' + box.id }}">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">[ {{box.id}} ]</h3>
+                        <button type="button" class="close" ng-class="{'hidden' : $index == 0 && boxes.length <= 1}" ng-click="removeBoxAtIndex($index)" ng-attr-id="{{ 'box-remove-' + box.id }}">
+                            <span>X</i></span>
+                        </button>
+                    </div>
+                    <div class="panel-body">
+                        <span class="pull-left">{{findNeighbourOfBox($index, boxes, "west").id}}</span>
+                        <span class="pull-right">{{findNeighbourOfBox($index, boxes, "east").id}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row stats">
+            <div class="col-xs-12 col-sm-6 col-md-5 col-sm-offset-6 col-md-offset-7">
+                <div class="alert alert-info" role="alert">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-7">
+                            Boxes right now:
+                        </div>
+                        <div class="col-xs-4 col-sm-5" id="boxes_right_now">
+                            {{boxes.length}}
+                        </div>
+                        <div class="col-xs-8 col-sm-7">
+                            Boxes created in total:
+                        </div>
+                        <div class="col-xs-4 col-sm-5" id="boxes_created_in_total">
+                            {{statistic.numberOfBoxesCreatedInTotal}}
+                        </div>
+                        <div class="col-xs-8 col-sm-7">
+                            Boxes created in session:
+                        </div>
+                        <div class="col-xs-4 col-sm-5" id="boxes_created_in_session">
+                            {{statistic.numberOfBoxesCreatedInSession}}
+                        </div>
+                        <div class="col-xs-8 col-sm-7">
+                            Boxes deleted in session:
+                        </div>
+                        <div class="col-xs-4 col-sm-5" id="boxes_deleted_in_session">
+                            {{statistic.numberOfBoxesDeletedInSession}}
+                        </div>
+                        <div class="col-xs-8 col-sm-7" ng-show="statistic.lastActionMessage">
+                            Last action:
+                        </div>
+                        <div class="col-xs-4 col-sm-5" ng-show="statistic.lastActionMessage" id="last_action_message">
+                            {{statistic.lastActionMessage}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
