@@ -1,7 +1,7 @@
 # experior
 
 ## To install and run locally
-1. git clone https://github.com/perjansson/Experior.git
+1. git clone https://github.com/perjansson/experior.git
 2. npm install (in experior folder)
 3. gulp unit-test (to run unit tests)
 4. gulp functional-test (to run selenium tests in chrome)
